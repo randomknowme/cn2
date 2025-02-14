@@ -4,6 +4,9 @@ https://github.com/randomknowme/cn2
 
 https://github.com/randomknowme/cn3
 
+gpt
+https://chatgpt.com/c/67ae5619-15c4-8001-be16-ecbae5ca68b0
+
 # unit 2
 ## **Collision Resolution Techniques in Hashing**
 When two keys map to the same index in a **hash table**, a **collision** occurs. To resolve these collisions, we use **collision resolution techniques**.
@@ -157,6 +160,67 @@ using:
 - **Linear probing is the simplest but suffers from primary clustering**.
 
 🚀 **For best performance**, use **double hashing** for open addressing, and **separate chaining** if memory is available.
+
+## **Collision Resolution Techniques: Time Complexity Analysis**  
+
+The time complexity of **collision resolution techniques** depends on **load factor (α = n/m)**, where:  
+- **n** = Number of elements inserted  
+- **m** = Size of the hash table  
+- **α (Load Factor) = n/m** determines performance.  
+
+### **1. Separate Chaining (Open Hashing)**  
+Each index in the table contains a **linked list** (or other data structure like BST).  
+- **Best Case (O(1))**: No collisions; the element is inserted/retrieved directly.  
+- **Average Case (O(1 + α))**: Searching within a short chain.  
+- **Worst Case (O(n))**: All elements hash to the same index, forming a **long linked list**.  
+
+🔹 **Example**: If **α ≈ 1**, then the average search time is **O(2) ≈ O(1)**. However, if **α is high** (many collisions), search time can degrade to **O(n)**.  
+
+---
+
+### **2. Open Addressing (Closed Hashing)**  
+Since all elements are stored **within the table**, searching involves **probing for an empty slot**.  
+
+#### **2.1 Linear Probing**  
+Checks for the **next available slot sequentially**.  
+- **Best Case (O(1))**: No collision; element is inserted/retrieved at first attempt.  
+- **Average Case (O(1/(1 - α)))**: Moderate collisions, but finds an empty slot quickly.  
+- **Worst Case (O(n))**: Clustering occurs, requiring many probes.  
+
+🔹 **Example**: If **α ≈ 0.5**, then average search time is **O(2)**; if **α ≈ 0.9**, search time is **O(10)**.  
+
+---
+
+#### **2.2 Quadratic Probing**  
+Uses **quadratic jumps** instead of sequential searches.  
+- **Best Case (O(1))**: No collision.  
+- **Average Case (O(1/(1 - α)))**: Reduced primary clustering.  
+- **Worst Case (O(n))**: If the table is poorly sized (non-prime), it may **fail to find an empty slot**.  
+
+🔹 **Example**: If **α is low (< 0.5)**, quadratic probing performs well. But as **α increases**, it degrades similarly to linear probing.  
+
+---
+
+#### **2.3 Double Hashing**  
+Uses a **second hash function** to determine probing sequence.  
+- **Best Case (O(1))**: No collision.  
+- **Average Case (O(1/(1 - α)))**: Fewer collisions than linear/quadratic probing.  
+- **Worst Case (O(n))**: If **α is too high**, even double hashing struggles.  
+
+🔹 **Example**: If **α is low (< 0.7)**, double hashing is **efficient**.  
+
+---
+
+## **Time Complexity Comparison Table**  
+| **Technique** | **Best Case** | **Average Case** | **Worst Case** |
+|--------------|-------------|---------------|--------------|
+| **Separate Chaining** | **O(1)** | **O(1 + α)** | **O(n)** (all elements in one bucket) |
+| **Linear Probing** | **O(1)** | **O(1 / (1 - α))** | **O(n)** (severe clustering) |
+| **Quadratic Probing** | **O(1)** | **O(1 / (1 - α))** | **O(n)** (if table size is not prime) |
+| **Double Hashing** | **O(1)** | **O(1 / (1 - α))** | **O(n)** (if α is too high) |
+
+---
+
 
 
 https://github.com/randomknowme/cn1
