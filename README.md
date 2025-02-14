@@ -8,6 +8,25 @@ gpt
 https://chatgpt.com/c/67ae5619-15c4-8001-be16-ecbae5ca68b0
 
 # unit 2
+![image](https://github.com/user-attachments/assets/d07d7a33-0248-4588-8303-c097c42f38ed)
+
+### **Comparison of Collision Resolution Techniques in Hashing**  
+
+| **Aspect** | **Separate Chaining (Open Hashing)** | **Linear Probing (Closed Hashing)** | **Quadratic Probing (Closed Hashing)** | **Double Hashing (Closed Hashing)** |
+|------------|--------------------------------|--------------------------|-------------------------|-------------------------|
+| **Basic Concept** | Uses a **linked list (or BST)** at each hash index to store multiple keys. | Searches **sequentially** for the next empty slot when a collision occurs. | Uses a **quadratic function** to probe for the next available slot. | Uses a **second hash function** to determine the step size for probing. |
+| **Memory Usage** | **Higher** due to additional linked lists/BSTs at each index. | **Lower** as all elements are stored in the main hash table. | **Lower**, same as Linear Probing but avoids clustering. | **Lower**, uses two hash functions but no extra storage. |
+| **Load Factor Impact (α = n/m)** | Can handle **α > 1**, as elements can grow within lists. | **Must be < 1** to maintain performance. | **Must be < 0.5** to ensure successful insertion. | **Must be < 0.7** to avoid excessive probing. |
+| **Insertion Time Complexity** | **O(1) Best, O(1+α) Avg, O(n) Worst** (if all elements hash to the same bucket). | **O(1) Best, O(1/(1-α)) Avg, O(n) Worst** (if the table is too full). | **O(1) Best, O(1/(1-α)) Avg, O(n) Worst** (if table size is not prime). | **O(1) Best, O(1/(1-α)) Avg, O(n) Worst** (if α is high). |
+| **Search Time Complexity** | **O(1+α) Avg, O(n) Worst** (depends on chain length). | **O(1) Best, O(1/(1-α)) Avg, O(n) Worst** (due to clustering). | **O(1) Best, O(1/(1-α)) Avg, O(n) Worst** (due to secondary clustering). | **O(1) Best, O(1/(1-α)) Avg, O(n) Worst** (avoids clustering but extra computation). |
+| **Collision Handling** | Uses **linked lists** to store multiple items in the same index. | Uses **sequential probing**, increasing index by 1. | Uses **quadratic probing** (i.e., \( h(k, i) = (h(k) + i^2) \mod m \)). | Uses **double hashing** \( h(k, i) = (h_1(k) + i \times h_2(k)) \mod m \). |
+| **Clustering Problem** | **No clustering** (since linked lists handle collisions). | **Primary Clustering** (consecutive filled slots slow down searches). | **Secondary Clustering** (keys with the same initial hash probe the same locations). | **No clustering**, since step size varies per key. |
+| **Resizing Strategy** | **No rehashing needed**, just increase list size. | **Rehashing required** when load factor increases. | **Rehashing required** when load factor increases. | **Rehashing required** when load factor increases. |
+| **Best Use Case** | Best for **dynamic insertions** (e.g., **databases, dictionaries**). | Best for **small, dense hash tables** (e.g., **cache storage**). | Best for **moderate load factors** where clustering needs to be reduced. | Best for **fast retrieval with a well-designed hash function**. |
+| **Overall Performance** | **Best when memory is available**. Avoids clustering but uses extra memory. | **Fastest when load factor is low**, but suffers from **primary clustering**. | **Improved performance over linear probing**, but **secondary clustering still exists**. | **Best performance for Open Addressing**, avoids clustering but has extra computation overhead. |
+
+---
+
 ## **Collision Resolution Techniques in Hashing**
 When two keys map to the same index in a **hash table**, a **collision** occurs. To resolve these collisions, we use **collision resolution techniques**.
 
@@ -218,6 +237,21 @@ Uses a **second hash function** to determine probing sequence.
 | **Linear Probing** | **O(1)** | **O(1 / (1 - α))** | **O(n)** (severe clustering) |
 | **Quadratic Probing** | **O(1)** | **O(1 / (1 - α))** | **O(n)** (if table size is not prime) |
 | **Double Hashing** | **O(1)** | **O(1 / (1 - α))** | **O(n)** (if α is too high) |
+
+---
+
+
+## **Differences Between Dictionaries and General Hash Tables**  
+### **2. Functionality Differences**  
+| **Feature**  | **Dictionaries**  | **General Hash Tables**  |
+|-------------|-----------------|------------------|
+| **Data Structure**  | **High-level** key-value store, often built on top of a hash table | **Low-level** array-based data structure using hashing |
+| **Collisions Handling** | Uses advanced techniques like **dynamic resizing, rehashing, and chaining** | Relies on **basic collision resolution methods** (e.g., linear probing, separate chaining) |
+| **Order Preservation** | Some implementations (like **Python 3.7+ dict**) maintain **insertion order** | No built-in ordering, pure hash tables store data **unordered** |
+| **Resizing Strategy** | **Automatically resizes dynamically** when the load factor is high | **Manual resizing may be required** to maintain performance |
+| **Security** | Some dictionaries use **hash randomization** to prevent attacks (e.g., **Python dicts**) | Basic hash tables don’t include security features |
+| **Performance Optimization** | Includes **caching mechanisms, advanced hashing strategies** | Basic hashing with no extra optimizations |
+| **Additional Features** | **Built-in methods** for iteration, sorting, key-value manipulation (`keys()`, `values()`, etc.) | Basic storage & retrieval, no extra utility functions |
 
 ---
 
