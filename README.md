@@ -4,6 +4,8 @@ https://github.com/randomknowme/cn2
 
 https://github.com/randomknowme/cn3
 
+gpt https://chatgpt.com/c/677ca69b-2d08-8001-be39-58ac8e4fb8fd
+
 # Dining Philosophers Using Monitors
 The Reader-Writer Problem ensures multiple readers can read at the same time, but only one writer can write to prevent data inconsistency.
 Uses synchronization mechanisms to avoid race conditions and starvation.
