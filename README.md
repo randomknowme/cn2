@@ -13,6 +13,7 @@ Aim:
 Description:
  We XOR all numbers 1..n and all elements of the array. Their XOR gives the missing number.
 Full Code:
+```
 class Solution:
     def missingNumber(self, nums):
         xor1 = 0
@@ -26,6 +27,7 @@ class Solution:
 if __name__ == "__main__":
     nums = [3, 0, 1]
     print("Missing Number:", Solution().missingNumber(nums))
+```
 
 Complexity:
 Time: O(n)
