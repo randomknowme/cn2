@@ -13,7 +13,7 @@ Aim:
 Description:
  We XOR all numbers 1..n and all elements of the array. Their XOR gives the missing number.
 Full Code:
-```
+```py
 class Solution:
     def missingNumber(self, nums):
         xor1 = 0
