@@ -7,6 +7,7 @@ https://github.com/randomknowme/cn3
 https://colab.research.google.com/drive/1Dq5Ko45BXX3-5Ok7PChpCbrOMOffd1o6?usp=sharing
 
 https://chatgpt.com/share/69a5375d-1a08-8009-9654-26207e4e95d8
+
 ---
 
 # **1) Implement perceptron neural network (gate operations, classification etc) and compute the accuracy.**
